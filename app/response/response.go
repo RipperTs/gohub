@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func ShowError(c *gin.Context, msg string) {
+func ShowError(c *gin.Context, msg any) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 422,
 		"msg":  msg,

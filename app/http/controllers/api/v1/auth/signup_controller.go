@@ -4,8 +4,8 @@ package auth
 import (
 	"github.com/gin-gonic/gin"
 	v1 "gohub/app/http/controllers/api/v1"
-	"gohub/app/http/response"
 	"gohub/app/models/user"
+	"gohub/app/response"
 )
 
 // SignupController 注册控制器
@@ -29,6 +29,7 @@ func (sc *SignupController) IsPhoneExist(c *gin.Context) {
 		return
 	}
 
+	// 返回响应结果
 	response.ShowSuccess(c, user.IsPhoneExist(request.Phone))
 
 }
