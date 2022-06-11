@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	v1 "gohub/app/http/controllers/api/v1"
 	"gohub/app/models/user"
+	"gohub/app/requests"
 	"gohub/app/response"
 )
 
@@ -16,40 +17,23 @@ type SignupController struct {
 // IsPhoneExist 检测手机号是否被注册
 func (sc *SignupController) IsPhoneExist(c *gin.Context) {
 
-	// 请求对象
-	type PhoneExistRequest struct {
-		Phone string `json:"phone"`
-	}
-	request := PhoneExistRequest{}
-
-	// 解析 JSON 请求
-	if err := c.ShouldBindJSON(&request); err != nil {
-		// 解析失败
-		response.ShowError(c, err.Error())
+	// 表单验证
+	request := requests.SignupPhoneExistRequest{}
+	if ok := requests.Validate(c, &request, requests.SignupPhoneExist); !ok {
 		return
 	}
 
-	// 返回响应结果
 	response.ShowSuccess(c, user.IsPhoneExist(request.Phone))
-
 }
 
 // IsEmailExist 检查邮箱是否被注册
 func (sc *SignupController) IsEmailExist(c *gin.Context) {
 
-	// 请求对象
-	type EmailExistRequest struct {
-		Email string `json:"email"`
-	}
-	request := EmailExistRequest{}
-
-	// 解析 JSON 请求
-	if err := c.ShouldBindJSON(&request); err != nil {
-		// 解析失败
-		response.ShowError(c, err.Error())
+	// 表单验证
+	request := requests.SignupEmailExistRequest{}
+	if ok := requests.Validate(c, &request, requests.SignupEmailExist); !ok {
 		return
 	}
-
 	// 返回响应结果
 	response.ShowSuccess(c, user.IsEmailExist(request.Email))
 }
