@@ -33,3 +33,23 @@ func (sc *SignupController) IsPhoneExist(c *gin.Context) {
 	response.ShowSuccess(c, user.IsPhoneExist(request.Phone))
 
 }
+
+// IsEmailExist 检查邮箱是否被注册
+func (sc *SignupController) IsEmailExist(c *gin.Context) {
+
+	// 请求对象
+	type EmailExistRequest struct {
+		Email string `json:"email"`
+	}
+	request := EmailExistRequest{}
+
+	// 解析 JSON 请求
+	if err := c.ShouldBindJSON(&request); err != nil {
+		// 解析失败
+		response.ShowError(c, err.Error())
+		return
+	}
+
+	// 返回响应结果
+	response.ShowSuccess(c, user.IsEmailExist(request.Email))
+}
