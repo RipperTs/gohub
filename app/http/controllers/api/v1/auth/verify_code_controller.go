@@ -5,12 +5,9 @@ import (
 	v1 "gohub/app/http/controllers/api/v1"
 	"gohub/app/requests"
 	"gohub/pkg/captcha"
-	"gohub/pkg/config"
 	"gohub/pkg/logger"
 	"gohub/pkg/response"
-	"gohub/pkg/sms"
-	"math/rand"
-	"strconv"
+	"gohub/pkg/verifycode"
 )
 
 // VerifyCodeController 用户控制器
@@ -32,39 +29,19 @@ func (vc *VerifyCodeController) ShowCaptcha(c *gin.Context) {
 	})
 }
 
-// VerifyCaptcha 验证图片验证码
-func (vc *VerifyCodeController) VerifyCaptcha(c *gin.Context) {
-	// 表单验证
-	request := requests.VerifyCodeRequest{}
-	if ok := requests.Validate(c, &request, requests.VerifyCaptchaId); !ok {
+// SendUsingPhone 发送手机验证码
+func (vc *VerifyCodeController) SendUsingPhone(c *gin.Context) {
+
+	// 验证表单
+	request := requests.VerifyCodePhoneRequest{}
+	if ok := requests.Validate(c, &request, requests.VerifyCodePhone); !ok {
 		return
 	}
 
-	// 验证码是否正确
-	result := captcha.NewCaptcha().VerifyCaptcha(request.Captcha_id, request.Answer)
-	// 返回响应结果
-	response.ShowSuccess(c, result)
-}
-
-// SendSmsVerifyCode 发送短信验证码
-func (vc *VerifyCodeController) SendSmsVerifyCode(c *gin.Context) {
-	// 表单验证
-	request := requests.SmsVerifyCodeRequest{}
-	if ok := requests.Validate(c, &request, requests.VerifySmsVerifyCode); !ok {
+	// 发送 SMS
+	if ok := verifycode.NewVerifyCode().SendSMS(request.Phone, 1); !ok {
+		response.ShowError(c, 422, "发送验证码失败")
 		return
 	}
-
-	// 随机生成6位数字
-	code := rand.Intn(999999) + 100000
-	// 执行发送短信验证码操作
-	result := sms.NewSMS().Send(request.Phone, sms.Message{
-		Template: config.GetString("sms.aliyun.template_code"),
-		Data:     map[string]string{"code": strconv.Itoa(code)},
-	}, 1)
-
-	if result {
-		response.ShowSuccess(c, result, "短信验证码发送成功!")
-		return
-	}
-	response.ShowError(c, 422, "短信验证码发送失败!")
+	response.ShowSuccess(c, nil, "发送验证码成功")
 }
