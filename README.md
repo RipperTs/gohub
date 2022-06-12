@@ -169,3 +169,33 @@ air
 ### air 配置信息
 我们可以使用 `.air.toml` 文件来配置 `air` 的行为。  
 
+
+## 邮件服务器Mailhog安装
+### 说明
+发送邮件需要有邮件服务器，在开发『发送邮件验证码功能』前，我们先来创建邮件服务器  
+
+#### Mailhog
+命令行安装 Mailhog ：  
+```
+GO111MODULE=on  go install github.com/mailhog/MailHog@latest
+```
+安装完成后运行 Mailhog ：  
+```
+MailHog
+```
+接下来将会输出:  
+```
+2022/06/12 12:03:28 Using in-memory storage
+2022/06/12 12:03:28 [SMTP] Binding to address: 0.0.0.0:1025
+[HTTP] Binding to address: 0.0.0.0:8025
+2022/06/12 12:03:28 Serving under http://0.0.0.0:8025/
+Creating API v1 with WebPath: 
+Creating API v2 with WebPath: 
+```
+以上输出有两个比较重要的信息：  
+
+- 0.0.0.0:1025 是 SMTP 端口
+- 0.0.0.0:8025/ 是网页界面  
+
+#### Web 界面
+访问 http://127.0.0.1:8025/ 
