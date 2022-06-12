@@ -25,7 +25,7 @@ func (s *SMTP) Send(email Email, config map[string]string) bool {
 	e.HTML = email.HTML
 
 	logger.DebugJSON("发送邮件", "发件详情", e)
-
+	logger.DebugJSON("发送邮件", "邮件配置", config)
 	err := e.Send(
 		fmt.Sprintf("%v:%v", config["host"], config["port"]),
 
