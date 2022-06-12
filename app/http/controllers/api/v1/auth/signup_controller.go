@@ -49,15 +49,39 @@ func (sc *SignupController) SignupUsingPhone(c *gin.Context) {
 	}
 
 	// 创建数据
-	_user := user.User{
+	userModel := user.User{
 		Name:     request.Name,
 		Phone:    request.Phone,
 		Password: request.Password,
 	}
-	_user.Create()
+	userModel.Create()
 
-	if _user.ID > 0 {
-		response.ShowSuccess(c, _user)
+	if userModel.ID > 0 {
+		response.ShowSuccess(c, userModel)
+		return
+	}
+	response.ShowError(c, 422, "注册失败")
+}
+
+// SignupUsingEmail 使用 Email + 验证码进行注册
+func (sc *SignupController) SignupUsingEmail(c *gin.Context) {
+
+	// 验证表单
+	request := requests.SignupUsingEmailRequest{}
+	if ok := requests.Validate(c, &request, requests.SignupUsingEmail); !ok {
+		return
+	}
+
+	// 创建数据
+	userModel := user.User{
+		Name:     request.Name,
+		Email:    request.Email,
+		Password: request.Password,
+	}
+	userModel.Create()
+
+	if userModel.ID > 0 {
+		response.ShowSuccess(c, userModel)
 		return
 	}
 	response.ShowError(c, 422, "注册失败")
