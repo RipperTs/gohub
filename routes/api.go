@@ -43,6 +43,11 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			// 邮箱注册用户
 			authGroup.POST("/signup/using-email", suc.SignupUsingEmail)
 
+			// 用户登录
+			lgc := new(auth.LoginController)
+			// 使用手机号，短信验证码进行登录
+			authGroup.POST("/login/using-phone", lgc.LoginByPhone)
+
 		}
 	}
 }
