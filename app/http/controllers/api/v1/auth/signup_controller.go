@@ -38,3 +38,27 @@ func (sc *SignupController) IsEmailExist(c *gin.Context) {
 	// 返回响应结果
 	response.ShowSuccess(c, user.IsEmailExist(request.Email))
 }
+
+// SignupUsingPhone 使用手机和验证码进行注册
+func (sc *SignupController) SignupUsingPhone(c *gin.Context) {
+
+	// 验证表单
+	request := requests.SignupUsingPhoneRequest{}
+	if ok := requests.Validate(c, &request, requests.SignupUsingPhone); !ok {
+		return
+	}
+
+	// 创建数据
+	_user := user.User{
+		Name:     request.Name,
+		Phone:    request.Phone,
+		Password: request.Password,
+	}
+	_user.Create()
+
+	if _user.ID > 0 {
+		response.ShowSuccess(c, _user)
+		return
+	}
+	response.ShowError(c, 422, "注册失败")
+}
