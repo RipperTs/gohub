@@ -60,3 +60,17 @@ func (lc *LoginController) LoginByPassword(c *gin.Context) {
 		})
 	}
 }
+
+// RefreshToken 刷新 Access Token
+func (lc *LoginController) RefreshToken(c *gin.Context) {
+
+	token, err := jwt.NewJWT().RefreshToken(c)
+
+	if err != nil {
+		response.ShowError(c, 422, "令牌刷新失败")
+		return
+	}
+	response.ShowSuccess(c, gin.H{
+		"token": token,
+	})
+}
