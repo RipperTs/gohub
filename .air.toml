@@ -21,7 +21,7 @@ exclude_file = []
 # 使用正则表达式进行忽略文件设置
 exclude_regex = []
 # 忽略未变更的文件
-exclude_unchanged = false
+exclude_unchanged = true
 # 监控系统链接的目录
 follow_symlink = false
 # 自定义参数，可以添加额外的编译标识，例如添加 GIN_MODE=release
@@ -37,7 +37,7 @@ log = "build-errors.log"
 # 在 kill 之前发送系统中断信号，windows 不支持此功能
 send_interrupt = false
 # error 发生时结束运行
-stop_on_error = true
+stop_on_error = false
 
 [color]
 # 自定义每个部分显示的颜色。如果找不到颜色，使用原始的应用程序日志。
