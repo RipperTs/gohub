@@ -6,6 +6,7 @@ import (
 	v1 "gohub/app/http/controllers/api/v1"
 	"gohub/app/models/user"
 	"gohub/app/requests"
+	"gohub/pkg/jwt"
 	"gohub/pkg/response"
 )
 
@@ -57,7 +58,11 @@ func (sc *SignupController) SignupUsingPhone(c *gin.Context) {
 	userModel.Create()
 
 	if userModel.ID > 0 {
-		response.ShowSuccess(c, userModel)
+		token := jwt.NewJWT().IssueToken(userModel.GetStringID(), userModel.Name)
+		response.ShowSuccess(c, gin.H{
+			"token":    token,
+			"userInfo": userModel,
+		})
 		return
 	}
 	response.ShowError(c, 422, "注册失败")
@@ -81,7 +86,11 @@ func (sc *SignupController) SignupUsingEmail(c *gin.Context) {
 	userModel.Create()
 
 	if userModel.ID > 0 {
-		response.ShowSuccess(c, userModel)
+		token := jwt.NewJWT().IssueToken(userModel.GetStringID(), userModel.Name)
+		response.ShowSuccess(c, gin.H{
+			"token":    token,
+			"userInfo": userModel,
+		})
 		return
 	}
 	response.ShowError(c, 422, "注册失败")
