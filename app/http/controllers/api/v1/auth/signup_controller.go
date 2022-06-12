@@ -34,6 +34,7 @@ func (sc *SignupController) IsEmailExist(c *gin.Context) {
 	if ok := requests.Validate(c, &request, requests.SignupEmailExist); !ok {
 		return
 	}
+
 	// 返回响应结果
 	response.ShowSuccess(c, user.IsEmailExist(request.Email))
 }
