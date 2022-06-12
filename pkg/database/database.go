@@ -26,6 +26,7 @@ func Connect(dbConfig gorm.Dialector, _logger gormlogger.Interface) {
 			TablePrefix:   config.Get("database.table_prefix"),
 			SingularTable: true,
 		},
+		DisableForeignKeyConstraintWhenMigrating: true,
 	})
 	// 处理错误
 	if err != nil {
