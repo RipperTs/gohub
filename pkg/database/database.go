@@ -4,6 +4,8 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"gohub/pkg/config"
+	"gorm.io/gorm/schema"
 
 	"gorm.io/gorm"
 	gormlogger "gorm.io/gorm/logger"
@@ -20,6 +22,10 @@ func Connect(dbConfig gorm.Dialector, _logger gormlogger.Interface) {
 	var err error
 	DB, err = gorm.Open(dbConfig, &gorm.Config{
 		Logger: _logger,
+		NamingStrategy: schema.NamingStrategy{
+			TablePrefix:   config.Get("database.table_prefix"),
+			SingularTable: true,
+		},
 	})
 	// 处理错误
 	if err != nil {

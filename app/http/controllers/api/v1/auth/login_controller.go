@@ -18,16 +18,15 @@ type LoginController struct {
 // LoginByPhone 手机登录
 func (lc *LoginController) LoginByPhone(c *gin.Context) {
 
-	// 1. 验证表单
+	// 验证表单
 	request := requests.LoginByPhoneRequest{}
 	if ok := requests.Validate(c, &request, requests.LoginByPhone); !ok {
 		return
 	}
 
-	// 2. 尝试登录
+	// 尝试登录
 	user, err := auth.LoginByPhone(request.Phone)
 	if err != nil {
-		// 失败，显示错误提示
 		response.ShowError(c, 422, err.Error())
 	} else {
 		// 登录成功
