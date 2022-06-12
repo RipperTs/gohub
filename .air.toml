@@ -21,7 +21,7 @@ exclude_file = []
 # 使用正则表达式进行忽略文件设置
 exclude_regex = []
 # 忽略未变更的文件
-exclude_unchanged = true
+exclude_unchanged = false
 # 监控系统链接的目录
 follow_symlink = false
 # 自定义参数，可以添加额外的编译标识，例如添加 GIN_MODE=release
@@ -49,7 +49,7 @@ watcher = "cyan"
 
 [log]
 # 显示日志时间
-time = false
+time = true
 
 [misc]
 # 退出时删除tmp目录
