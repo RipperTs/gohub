@@ -19,10 +19,10 @@ func VerifyCaptchaId(data interface{}, c *gin.Context) map[string][]string {
 	// 自定义验证出错时的提示
 	messages := govalidator.MapData{
 		"captcha_id": []string{
-			"required:captcha_id 为必填项",
+			"required:必填项不能为空",
 		},
 		"answer": []string{
-			"required:answer 为必填项",
+			"required:必填项不能为空",
 		},
 	}
 	return validate(data, rules, messages)

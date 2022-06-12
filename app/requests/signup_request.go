@@ -37,10 +37,10 @@ func SignupEmailExist(data interface{}, c *gin.Context) map[string][]string {
 	// 自定义验证出错时的提示
 	messages := govalidator.MapData{
 		"email": []string{
-			"required:Email 为必填项",
-			"min:Email 长度需大于 4",
-			"max:Email 长度需小于 30",
-			"email:Email 格式不正确，请提供有效的邮箱地址",
+			"required:必填项不能为空",
+			"min:长度需大于 4",
+			"max:长度需小于 30",
+			"email:格式不正确，请提供有效的邮箱地址",
 		},
 	}
 	return validate(data, rules, messages)

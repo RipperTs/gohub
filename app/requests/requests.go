@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/thedevsaddam/govalidator"
-	"gohub/app/response"
+	"gohub/pkg/helpers"
+	"gohub/pkg/response"
 )
 
 // ValidatorFunc 验证函数类型
@@ -29,7 +30,7 @@ func Validate(c *gin.Context, obj interface{}, handler ValidatorFunc) bool {
 
 	// 3. 判断验证是否通过
 	if len(errs) > 0 {
-		response.ShowError(c, 422, errs)
+		response.ShowError(c, 422, helpers.MapToJson(errs))
 		return false
 	}
 

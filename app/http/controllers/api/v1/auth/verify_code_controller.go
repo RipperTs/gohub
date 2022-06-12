@@ -4,9 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	v1 "gohub/app/http/controllers/api/v1"
 	"gohub/app/requests"
-	"gohub/app/response"
 	"gohub/pkg/captcha"
 	"gohub/pkg/logger"
+	"gohub/pkg/response"
 )
 
 // VerifyCodeController 用户控制器

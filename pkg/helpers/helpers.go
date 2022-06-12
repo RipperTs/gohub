@@ -2,6 +2,7 @@
 package helpers
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"time"
@@ -36,4 +37,11 @@ func Empty(val interface{}) bool {
 // 输出为小数点后 3 位的 ms （microsecond 毫秒，千分之一秒）
 func MicrosecondsStr(elapsed time.Duration) string {
 	return fmt.Sprintf("%.3fms", float64(elapsed.Nanoseconds())/1e6)
+}
+
+// MapToJson 将 map 转换为 json 字符串
+func MapToJson(param map[string][]string) string {
+	dataType, _ := json.Marshal(param)
+	dataString := string(dataType)
+	return dataString
 }

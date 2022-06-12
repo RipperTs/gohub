@@ -6,7 +6,7 @@ import (
 	v1 "gohub/app/http/controllers/api/v1"
 	"gohub/app/models/user"
 	"gohub/app/requests"
-	"gohub/app/response"
+	"gohub/pkg/response"
 )
 
 // SignupController 注册控制器
