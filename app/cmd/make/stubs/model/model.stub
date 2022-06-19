@@ -1,0 +1,34 @@
+//Package {{PackageName}} 模型
+package {{PackageName}}
+
+import (
+    "gohub/pkg/logger"
+    "gohub/pkg/database"
+    "gohub/app/models"
+)
+
+type {{StructName}} struct {
+    models.BaseModel
+
+    // 将数据库字段与结构体字段一一对应
+    FIXME()
+
+    models.CommonTimestampsField
+}
+
+// Create 新增一条数据并返回切片
+func (this *{{StructName}}) Create() {
+    database.DB.Create(&this)
+}
+
+// Save 编辑或保存一条数据并返回影响行数
+func (this *{{StructName}}) Save() (rowsAffected int64) {
+    result := database.DB.Save(&this)
+    return result.RowsAffected
+}
+
+// Delete 删除一条数据并返回影响行数
+func (this *{{StructName}}) Delete() (rowsAffected int64) {
+    result := database.DB.Delete(&this)
+    return result.RowsAffected
+}

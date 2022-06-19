@@ -1,0 +1,17 @@
+package {{PackageName}}
+
+import (
+	"gohub/pkg/hash"
+
+	"gorm.io/gorm"
+)
+
+// func (this *{{StructName}}) BeforeSave(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) BeforeCreate(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) AfterCreate(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) BeforeUpdate(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) AfterUpdate(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) AfterSave(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) BeforeDelete(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) AfterDelete(tx *gorm.DB) (err error) {}
+// func (this *{{StructName}}) AfterFind(tx *gorm.DB) (err error) {}
