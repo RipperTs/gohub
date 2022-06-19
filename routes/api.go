@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gohub/app/http/controllers/api/v1/auth"
 	"gohub/app/http/middlewares"
+	"gohub/pkg/config"
 	"net/http"
 )
 
@@ -14,7 +15,7 @@ func RegisterAPIRoutes(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
 		// 以 JSON 格式响应
 		c.JSON(http.StatusOK, gin.H{
-			"msg": "Hello GoHub!",
+			"msg": "Hello " + config.GetString("app.name"),
 		})
 	})
 	// 所有的 v1 版本的路由都将存放到这里
@@ -67,5 +68,6 @@ func RegisterAPIRoutes(r *gin.Engine) {
 				authGroup.POST("/password-reset/using-email", pwc.ResetByEmail)
 			}
 		}
+
 	}
 }
