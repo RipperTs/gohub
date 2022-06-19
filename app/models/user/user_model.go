@@ -11,9 +11,9 @@ import (
 type User struct {
 	models.BaseModel
 
-	Name     string `json:"name,omitempty"`
-	Email    string `json:"-"`
-	Phone    string `json:"-"`
+	Name     string
+	Email    string
+	Phone    string `json:"-"` // 忽略字段输出
 	Password string `json:"-"`
 
 	models.CommonTimestampsField

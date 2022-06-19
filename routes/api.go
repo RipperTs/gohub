@@ -3,6 +3,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	controllers "gohub/app/http/controllers/api/v1"
 	"gohub/app/http/controllers/api/v1/auth"
 	"gohub/app/http/middlewares"
 	"gohub/pkg/config"
@@ -69,5 +70,14 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			}
 		}
 
+		// 用户管理
+		userGroup := v1.Group("/users")
+		userGroup.Use(middlewares.AuthJWT())
+		{
+			user := new(controllers.UsersController)
+			// 获取当前用户
+			userGroup.GET("/", middlewares.AuthJWT(), user.CurrentUser)
+			userGroup.GET("/lists", middlewares.AuthJWT(), user.Index)
+		}
 	}
 }

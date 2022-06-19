@@ -15,7 +15,7 @@ type {{StructNamePlural}}Controller struct {
 // Index 查询{{StructNamePlural}}列表
 func (this *{{StructNamePlural}}Controller) Index(c *gin.Context) {
     {{VariableNamePlural}} := {{PackageName}}.All()
-    response.ShowSuccess(c,projects)
+    response.ShowSuccess(c,{{VariableNamePlural}})
 }
 
 // Show 按条件查询{{StructNamePlural}}一条数据
@@ -25,7 +25,7 @@ func (this *{{StructNamePlural}}Controller) Show(c *gin.Context) {
         response.ShowError(c,404)
         return
     }
-    response.ShowSuccess(c,projectModel)
+    response.ShowSuccess(c,{{VariableName}}Model)
 }
 
 // Store 新增{{StructNamePlural}}一条数据
@@ -41,7 +41,7 @@ func (this *{{StructNamePlural}}Controller) Store(c *gin.Context) {
     }
     projectModel.Create()
     if projectModel.ID > 0 {
-        response.ShowSuccess(c, projectModel)
+        response.ShowSuccess(c, {{VariableName}}Model)
         return
     }
     response.ShowError(c,422,"创建失败，请稍后尝试~")
@@ -74,7 +74,7 @@ func (this *{{StructNamePlural}}Controller) Update(c *gin.Context) {
     {{VariableName}}Model.FieldName = request.FieldName
     rowsAffected := {{VariableName}}Model.Save()
     if rowsAffected > 0 {
-        response.ShowSuccess(c,projectModel)
+        response.ShowSuccess(c,{{VariableName}}Model)
         return
     }
     response.ShowError(c,500,"更新失败，请稍后尝试~")
