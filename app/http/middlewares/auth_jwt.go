@@ -2,6 +2,7 @@
 package middlewares
 
 import (
+	"github.com/spf13/cast"
 	"gohub/app/models/user"
 	"gohub/pkg/jwt"
 	"gohub/pkg/response"
@@ -25,7 +26,7 @@ func AuthJWT() gin.HandlerFunc {
 		}
 
 		// JWT 解析成功，设置用户信息
-		userModel := user.Get(claims.UserID)
+		userModel := user.Get(cast.ToString(claims.UserID))
 		if userModel.ID == 0 {
 			response.ShowError(c, http.StatusUnauthorized, "用户不存在")
 			c.Abort()

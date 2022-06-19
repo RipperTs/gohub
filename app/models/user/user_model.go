@@ -28,3 +28,9 @@ func (this *User) Create() {
 func (this *User) ComparePassword(_password string) bool {
 	return hash.BcryptCheck(_password, this.Password)
 }
+
+// Save 保存数据
+func (this *User) Save() (rowsAffected int64) {
+	result := database.DB.Save(&this)
+	return result.RowsAffected
+}
