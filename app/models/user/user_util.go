@@ -39,3 +39,9 @@ func Get(idstr string) (this User) {
 	database.DB.Where("id", idstr).First(&this)
 	return
 }
+
+// GetByEmail 通过 Email 来获取用户
+func GetByEmail(email string) (this User) {
+	database.DB.Where("email = ?", email).First(&this)
+	return
+}
