@@ -8,7 +8,7 @@ import (
 type {{StructName}}Request struct {
     // Name        string `valid:"name" json:"name"`
     // Description string `valid:"description" json:"description,omitempty"`
-    FIXME()
+    // FIXME()
 }
 
 func {{StructName}}Save(data interface{}, c *gin.Context) map[string][]string {

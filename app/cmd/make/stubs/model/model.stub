@@ -11,7 +11,7 @@ type {{StructName}} struct {
     models.BaseModel
 
     // 将数据库字段与结构体字段一一对应
-    FIXME()
+    // FIXME()
 
     models.CommonTimestampsField
 }
