@@ -31,6 +31,8 @@ func registerGlobalMiddleWare(router *gin.Engine) {
 		middlewares.Logger(),
 		// 全局异常处理
 		middlewares.Recovery(),
+		// 强制 User Agent 中间件
+		middlewares.ForceUA(),
 	)
 }
 
