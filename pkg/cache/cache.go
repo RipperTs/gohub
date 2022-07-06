@@ -118,8 +118,8 @@ func GetStringMapStringSlice(key string) map[string][]string {
 	return cast.ToStringMapStringSlice(Get(key))
 }
 
-func Forget(key string) {
-	Cache.Store.Forget(key)
+func Del(key string) {
+	Cache.Store.Del(key)
 }
 
 func Forever(key string, value string) {

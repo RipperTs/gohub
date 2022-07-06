@@ -31,7 +31,7 @@ func (s *RedisStore) Has(key string) bool {
 	return s.RedisClient.Has(s.KeyPrefix + key)
 }
 
-func (s *RedisStore) Forget(key string) {
+func (s *RedisStore) Del(key string) {
 	s.RedisClient.Del(s.KeyPrefix + key)
 }
 
