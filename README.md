@@ -5,6 +5,8 @@
 - `Github API` 是设计优良的一套 `RESTful API`，业内知名度很高，程序中设计方案部分对其做参考和引用。
 - `PHP` 的 `Laravel` 框架已经是最知名 `Web` 开发框架之一，它的程序结构清晰，照顾到 `Web/API` 开发的方方面面。故本项目，程序结构大体参考 `Laravel` 框架。
 
+详细开发文档参考：[GoHub1.x完全开发手册](https://www.kancloud.cn/wswdy/gohub/3009900)  
+
 ## 系统环境
 - golang语言：go1.18
 - 数据库：mysql5.7
