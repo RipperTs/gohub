@@ -271,13 +271,3 @@ Creating API v2 with WebPath:
 
 #### Web 界面
 访问 http://127.0.0.1:8025/ 
-
-
-```go
-    result := app.CurlGet("http://127.0.0.1:9007/api/v1/test/test").GetContents()
-	js, errs := simplejson.NewJson([]byte(result))
-	if errs != nil {
-		return
-	}
-	fmt.Println(js.Get("data").Get("wechat_payment_mchid").MustString())
-```
